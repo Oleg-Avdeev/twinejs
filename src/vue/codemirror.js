@@ -2,6 +2,8 @@
 
 const Vue = require('vue');
 const CodeMirror = require('codemirror');
+const { spellOverlay } = require ('../dictionaries/spellcheck');
+
 
 require('./codemirror-theme.less');
 
@@ -24,6 +26,7 @@ module.exports = Vue.extend({
 	compiled() {
 		this.$cm = CodeMirror(this.$el, this.options);
 		this.$cm.setValue((this.text || '') + '');
+		this.$cm.addOverlay(spellOverlay);
 
 		/*
 		Remove the empty state from existing in undo history, e.g. so if the
